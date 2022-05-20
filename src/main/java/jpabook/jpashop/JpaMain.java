@@ -1,7 +1,6 @@
 package jpabook.jpashop;
 
-import jpabook.jpashop.domain.Member;
-import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,6 +13,25 @@ public class JpaMain {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
+
+        Member member = new Member();
+        member.setName("memberA");
+        entityManager.persist(member);
+
+        Order order = new Order();
+        order.setOrderStatus(OrderStatus.ORDER);
+        order.setMember(member);
+        entityManager.persist(order);
+
+        Item item = new Item();
+        item.setName("itemA");
+        entityManager.persist(item);
+
+
+        OrderItem orderItem = new OrderItem();
+        orderItem.setOrder(order);
+        orderItem.setItem(item);
+        entityManager.persist(orderItem);
 
         transaction.commit();
         entityManager.close();
