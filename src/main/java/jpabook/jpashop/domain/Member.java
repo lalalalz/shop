@@ -19,6 +19,7 @@ public class Member {
     private String street;
     private String zipcode;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany
+    @JoinColumn(name = "member")
     private List<Order> orders = new ArrayList<>();
 }

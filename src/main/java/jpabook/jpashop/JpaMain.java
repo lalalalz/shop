@@ -14,6 +14,21 @@ public class JpaMain {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
+
+        Order order = new Order();
+        entityManager.persist(order);
+
+        Member member = new Member();
+        member.getOrders().add(order);
+        entityManager.persist(member);
+
+
+        transaction.commit();
+        entityManager.close();
+        entityManagerFactory.close();
+    }
+
+    private static void 연관관계매핑실전예제테스트(EntityManager entityManager) {
         Member member = new Member();
         member.setName("memberA");
         entityManager.persist(member);
@@ -32,10 +47,6 @@ public class JpaMain {
         orderItem.setOrder(order);
         orderItem.setItem(item);
         entityManager.persist(orderItem);
-
-        transaction.commit();
-        entityManager.close();
-        entityManagerFactory.close();
     }
 
     private static void relationTest2(EntityManager entityManager) {
