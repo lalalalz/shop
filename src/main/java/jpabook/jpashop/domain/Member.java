@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-public class Member {
+public class Member extends BaseAttributes {
 
     @Id @GeneratedValue
     @Column(name = "MEMBER_ID")

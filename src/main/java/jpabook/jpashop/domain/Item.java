@@ -8,7 +8,8 @@ import java.util.List;
 
 @Data
 @Entity
-public class Item {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Item extends BaseAttributes {
 
     @Id @GeneratedValue
     @Column(name = "ITEM_ID")

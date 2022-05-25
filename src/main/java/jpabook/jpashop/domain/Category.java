@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-public class Category {
+public class Category extends BaseAttributes {
 
     @Id
     @GeneratedValue

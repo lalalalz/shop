@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class OrderItem {
+public class OrderItem extends BaseAttributes {
 
     @Id @GeneratedValue
     @Column(name = "ORDER_ITEM_ID")
