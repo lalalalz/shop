@@ -14,18 +14,44 @@ public class JpaMain {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
+Delivery delivery = new Delivery();
+//entityManager.persist(delivery);
 
-        Order order = new Order();
-        entityManager.persist(order);
+Order order = new Order();
+order.setDelivery(delivery);
+entityManager.persist(order);
 
-        Member member = new Member();
-        member.getOrders().add(order);
-        entityManager.persist(member);
+entityManager.flush();
+entityManager.clear();
 
+Order findOrder = entityManager.find(Order.class, order.getId());
+System.out.println("findOrder.getDelivery().getClass() = " + findOrder.getDelivery().getClass());
 
         transaction.commit();
         entityManager.close();
         entityManagerFactory.close();
+    }
+
+
+
+    private static void 컬렉션래퍼지연로딩테스트(EntityManager entityManager) {
+        Category category = new Category();
+        category.setName("A");
+        entityManager.persist(category);
+
+        Item item = new Item();
+        item.setName("itemA");
+        item.setCategories(category);
+        entityManager.persist(item);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        Item findItem = entityManager.find(Item.class, item.getId());
+        System.out.println("findItem.getCategories().getClass() = " + findItem.getCategories().getClass());
+//        for (Category findItemCategory : findItem.getCategories()) {
+//            System.out.println("findItemCategory.getClass() = " + findItemCategory.getClass());
+//        }
     }
 
     private static void 연관관계매핑실전예제테스트(EntityManager entityManager) {

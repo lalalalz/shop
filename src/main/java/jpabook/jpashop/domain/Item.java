@@ -21,4 +21,9 @@ public class Item extends BaseAttributes {
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
+
+    public void setCategories(Category category) {
+        categories.add(category);
+        category.getItems().add(this);
+    }
 }
